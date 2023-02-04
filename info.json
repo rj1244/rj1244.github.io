@@ -4,11 +4,7 @@
          "road":"M48",
          "closed":false,
          "colour":"green",
-         "closureMsg":"",
-         "ActualClosure":"20/2/23 00:00",
-         "ActualOpening":"20/2/23 00:00",
-         "openingETA":"20/2/23 00:00",
-         "closureETA":"20/2/23 00:00"
+         "closureMsg":""
       }
    ]
 }
