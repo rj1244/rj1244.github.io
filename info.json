@@ -2,9 +2,13 @@
    "Status":[
       {
          "road":"M48",
-         "closed":false,
-         "colour":"green",
-         "closureMsg":""
+         "status": 0,
+         "closureMsg":"Open"
+      },
+      {
+         "road":"M4",
+         "status": 1,
+         "closureMsg":"Eastbound Closure"
       }
    ]
 }
