@@ -1,10 +1,12 @@
 [
    {
+      "id":0,
       "road":"M48",
       "status":0,
       "closureMsg":"Open"
    },
    {
+      "id":1,
       "road":"M4",
       "status":1,
       "closureMsg":"Eastbound Closure"
