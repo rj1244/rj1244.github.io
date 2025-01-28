@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Today's Newspaper Prices</title>
-    <style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+		<style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Open Sans", serif;
             background-color: #f5f5f5;
 						margin: 0;
             padding: 20px;
@@ -57,14 +60,15 @@
 
 <script>
     const newspapers = [
-        { name: "Daily Express", weekday: "£1.70", saturday: "£2.40", sunday: "£2.80" },
-        { name: "Guardian", weekday: "£3.00", saturday: "£4.00", sunday: null },
-        { name: "Observer", weekday: null, saturday: null, sunday: "£4.00" },
-        { name: "i Daily", weekday: "£1.00", saturday: "£1.80", sunday: "£1.80" },
-        { name: "Daily Mail", weekday: "£1.10", saturday: "£1.60", sunday: "£2.20" },
-        { name: "Daily Mirror", weekday: "£1.70", saturday: "£2.50", sunday: "£2.80" },
-        { name: "Daily Telegraph", weekday: "£3.50", saturday: "£4.50", sunday: "£3.50" },
-        { name: "The Times", weekday: "£2.80", saturday: "£4.00", sunday: "£4.50" }
+        { name: "Daily Express", weekday: 1.70, saturday: 2.40, sunday: 2.80 },
+        { name: "Guardian", weekday: 3.00, saturday: 4.00, sunday: null },
+        { name: "Observer", weekday: null, saturday: null, sunday: 4.00 },
+        { name: "i Daily", weekday: 1.00, saturday: null, sunday: null },
+				{ name: "i Weekend", weekday: null, saturday: 1.80, sunday: 1.80 },
+        { name: "Daily Mail", weekday: 1.10, saturday: 1.60, sunday: 2.20 },
+        { name: "Daily Mirror", weekday: 1.70, saturday: 2.50, sunday: 2.80 },
+        { name: "Daily Telegraph", weekday: 3.50, saturday: 4.50, sunday: 3.50 },
+        { name: "The Times", weekday: 2.80, saturday: 4.00, sunday: 4.50 }
     ];
 
     // Get the current day of the week
@@ -82,7 +86,11 @@
     }
 
     // Filter newspapers available today
-    const availableNewspapers = newspapers.filter(paper => paper[dayType]);
+    const availableNewspapers = newspapers.filter(paper => paper[dayType]).sort((a, b) => {
+  if (a.name.toUpperCase() < b.name.toUpperCase()) return -1; // a comes before b
+  if (a.name.toUpperCase() > b.name.toUpperCase()) return 1;  // a comes after b
+  return 0; // names are equal
+});
 
     // Get the container to display the table
     const container = document.getElementById("newspaper-container");
@@ -106,7 +114,7 @@
             tableHTML += `
                 <tr>
                     <td>${paper.name}</td>
-                    <td>${paper[dayType]}</td>
+                    <td>£${paper[dayType].toFixed(2)}</td>
                     <td>
                         <input type="number" id="coupon-${index}" min="0" value="0" oninput="calculateTotal()">
                     </td>
@@ -132,7 +140,7 @@
 
         availableNewspapers.forEach((paper, index) => {
             const priceString = paper[dayType];
-            const price = parseFloat(priceString.replace("£", ""));
+            const price = priceString;
             const couponInput = document.getElementById(`coupon-${index}`);
             const couponCount = parseInt(couponInput.value) || 0;
 
